@@ -85,7 +85,7 @@ export class NavbarService {
 'x-requested-with':'XMLHttpRequest'
       
   });
-    return this.httpClient.get("http://www.moneycontrol.com/mccode/common/autosuggestion_solr.php?classic=true&query="+keyword+"&type=1&format=json&callback=suggest1",{headers,responseType: 'text'})
+    return this.httpClient.get("https://www.moneycontrol.com/mccode/common/autosuggestion_solr.php?classic=true&query="+keyword+"&type=1&format=json&callback=suggest1",{headers,responseType: 'text'})
     .pipe(
       tap((response) => {{
         
