@@ -1,0 +1,28 @@
+<p>
+  <strong>Add your Favourites Stocks here</strong>
+</p>
+<table>
+  <tr>
+    <td>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input type="text" class="form-control" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+    <mat-autocomplete  autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+  </td>
+  <td>
+<button [ngClass]="{'btn':true,'btn-primary':true}" (click)="add()">Add</button>
+</td>
+</tr>
+<tr>
+  {{selectedStock|json}}
+</tr>
+</table>
+
+
+

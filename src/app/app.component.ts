@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, PreloadingStrategy } from '@angular/router';
 import { UserComponent } from './user/user.component';
-import { AdminComponent } from './admin/admin.component';
+import { AddFavouritesComponent } from './add-favourites/add-favourites.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarService } from './services/navbar.service';
+import { MyFavouritesComponent } from './my-favourites/my-favourites.component';
+import { markParentViewsForCheckProjectedViews } from '@angular/core/src/view/util';
+
 
 @Component({
   selector: 'app-root',
@@ -14,12 +17,15 @@ export class AppComponent implements OnInit {
 
   links: Array<{ text: string, path: string }>;
   isLoggedIn = false;
+  myFavouritesClicked=true
+  addFavouritesClicked=false
 
   constructor(private router: Router, private navbarService: NavbarService) {
     this.router.config.unshift(
       { path: 'login', component: LoginComponent },
       { path: 'user', component: UserComponent },
-      { path: 'admin', component: AdminComponent },
+      { path: 'add-favourites', component: AddFavouritesComponent },
+      { path: 'my-favourites', component: MyFavouritesComponent },
     );
   }
 
@@ -31,5 +37,12 @@ export class AppComponent implements OnInit {
   logout() {
     this.navbarService.updateLoginStatus(false);
     this.router.navigate(['home']);
+  }
+
+  addFavourites() {
+    this.myFavouritesClicked=false
+    this.addFavouritesClicked=true
+    this.router.navigate(['add-favourites']);
+  
   }
 }
