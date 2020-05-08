@@ -4,13 +4,24 @@
       <a class="navbar-brand" href="#">Stocks</a>
     </div>
 
-    <input type="text" class="nav navbar-nav form-control-plaintext">
 
-    <ul class="nav navbar-nav">
-      <li class="nav-item"><a class="nav-link" routerLink="home">Login</a></li>
+   
+    <form action="/action_page.php">
+      <table>
+        <tr>
+          <td>
+        <input type="text" class="form-control" placeholder="Mobile Number" id="usr" name="username">
       
-    </ul>
+    </td>
+      <td>&nbsp;&nbsp;<button type="submit" class="btn btn-outline-primary">LOGIN</button></td>
+    </tr>
+  </table>
+    </form>
+
+    
   </div>
+  <br/>
+
 </nav>
 <div class="container">
     <button [ngClass]="{'btn':true,'btn-primary':addFavouritesClicked}" (click)="addFavourites()">Add Favorites</button>

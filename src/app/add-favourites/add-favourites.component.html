@@ -8,7 +8,7 @@
   <mat-form-field class="example-full-width">
     <input type="text" class="form-control" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
     <mat-autocomplete  autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      <mat-option (click)="onSelect(option)" *ngFor="let option of filteredOptions | async" [value]="option" >
         {{option.name}}
       </mat-option>
     </mat-autocomplete>
@@ -19,10 +19,30 @@
 <button [ngClass]="{'btn':true,'btn-primary':true}" (click)="add()">Add</button>
 </td>
 </tr>
-<tr>
-  {{selectedStock|json}}
-</tr>
 </table>
+
+<div *ngIf="selectedStock!=undefined">
+<hr/>
+<table class="table table-bordered table-inverse">
+  <tbody>
+<tr >
+  <td><p>Stock name : </p></td>
+  <td><p>{{selectedStock.name}}</p></td>
+</tr>
+
+<tr>
+  <td><p>Stock Id : </p></td>
+  <td><p>{{selectedStock.id}}</p></td>
+</tr>
+
+<tr>
+  <td><p>Current Price : </p></td>
+  <td><p>{{priceCurrent}} &nbsp;&nbsp;&nbsp;<sub [ngClass]="priceChange>0?'green':'red'">{{priceChange}}</sub></p></td>
+</tr>
+
+</tbody>
+</table>
+</div>
 
 
 

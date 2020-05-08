@@ -1,6 +1,7 @@
 
 export interface IStocks {
     id: any, 
-    name: any
+    name: any,
+    mcId:any
   }
   

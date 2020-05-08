@@ -18,16 +18,19 @@ export class AddFavouritesComponent implements OnInit {
 
   stocks:{ id: any, name: any }[]=new Array()
   selectedStock:IStocks  
+  currentPrice:string
+
+priceCurrent :string;
+priceChange :Number;
+pricePercentageChange :Number;
+
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable< IStocks[]>;
 
   displayFn(stock:IStocks): string {
-    this.selectedStock = stock
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    console.log(this.selectedStock.name)
-  
-    return stock ? stock.id : stock;
+    //this.selectedStock = stock
+    return stock ? stock.name : stock;
 }
 
   ngOnInit() {
@@ -40,17 +43,28 @@ export class AddFavouritesComponent implements OnInit {
   }
 
   add(){
-    console.log("%%%%%%%%%%%%%%%%%%%%%%%%5")
     console.log(this.selectedStock.name)
   }
 
-  getSymbols(value:string): IStocks[]{
-    var stocks: IStocks[]= new Array()
-    
-    if(value.trim().length==0)
-      return stocks;
+  onSelect(option){
+console.log("@@@@@@@@@@@@@@@@@@@@")
+this.navbarService.getStockPrice(option.mcId).subscribe(res=>{
+  res= JSON.parse(res)
+  console.log("@@@@@^^^^^^^^^^^^^@@@@@@@@@@@@@@@")
+  console.log(res);
+  this.selectedStock = option
+  console.log(res.data.pricecurrent)
+  this.priceCurrent = res.data.pricecurrent
+  this.priceChange = res.data.pricechange
+  this.pricePercentageChange = res.data.pricepercentagechange
+}
+);
 
-    console.log("^^^^^"+value)
+  }
+
+  getSymbols(value:string): IStocks[]{
+    this.selectedStock = undefined
+    var stocks: IStocks[]= new Array()
      this.navbarService.getStockList(value).subscribe(response1=>{
 
        response1 = response1.replace('suggest1(','')
@@ -58,7 +72,7 @@ export class AddFavouritesComponent implements OnInit {
        var res= JSON.parse(response1);
       
         res.forEach(element => {
-          stocks.push({id:element.pdt_dis_nm.split(',')[1],name:element.stock_name})
+          stocks.push({id:element.pdt_dis_nm.split(',')[1],name:element.stock_name,mcId:element.sc_id})
       
         })
       

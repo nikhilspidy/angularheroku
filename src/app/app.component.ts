@@ -47,6 +47,9 @@ export class AppComponent implements OnInit {
   }
 
   myFavourites(){
-    
+    this.myFavouritesClicked=true
+    this.addFavouritesClicked=false
+    this.router.navigate(['my-favourites']);
+
   }
 }
