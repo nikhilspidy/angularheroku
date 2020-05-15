@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   isLoggedIn = false;
   myFavouritesClicked=true
   addFavouritesClicked=false
+  mobileNumber:string
 
   constructor(private router: Router, private navbarService: NavbarService) {
     this.router.config.unshift(
@@ -29,14 +30,25 @@ export class AppComponent implements OnInit {
     );
   }
 
+  loggedIn = false
+
   ngOnInit() {
-    this.links = this.navbarService.getLinks();
-    this.navbarService.getLoginStatus().subscribe(status => this.isLoggedIn = status);
+    if(localStorage.getItem('mobileNumber')!='undefined' && localStorage.getItem('mobileNumber')!=null){
+      this.mobileNumber = localStorage.getItem('mobileNumber');
+      this.loggedIn = true
+    }
+  
+  }
+
+  login(){
+    this.loggedIn = true;
+    localStorage.setItem("mobileNumber", this.mobileNumber);
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+this.mobileNumber)
   }
 
   logout() {
-    this.navbarService.updateLoginStatus(false);
-    this.router.navigate(['home']);
+    this.loggedIn = false;
+    localStorage.removeItem("mobileNumber");
   }
 
   addFavourites() {

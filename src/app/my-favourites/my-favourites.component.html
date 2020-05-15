@@ -1,0 +1,16 @@
+<p><strong>My Stocks</strong></p>
+<div><img class="loading-image" *ngIf="loading" src="assets/loading.gif" />
+</div>
+
+<table *ngIf="!loading" class="table table-bordered table-inverse">
+    <tbody>
+  <tr *ngFor="let data of listOfMyStocksDetails">
+
+      <td><p>{{data.data.SC_FULLNM}}</p></td>
+ 
+      <td><p>{{data.data.pricecurrent}} &nbsp;&nbsp;&nbsp;<sub [ngClass]="data.data.pricechange>0?'green':'red'">{{data.data.pricechange}}</sub></p></td>
+     
+    </tr>
+    
+    </tbody>
+  </table>

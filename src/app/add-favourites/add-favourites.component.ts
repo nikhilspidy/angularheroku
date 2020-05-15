@@ -65,7 +65,7 @@ this.navbarService.getStockPrice(option.mcId).subscribe(res=>{
   getSymbols(value:string): IStocks[]{
     this.selectedStock = undefined
     var stocks: IStocks[]= new Array()
-     this.navbarService.getStockList(value).subscribe(response1=>{
+     this.navbarService.getStockSuggestions(value).subscribe(response1=>{
 
        response1 = response1.replace('suggest1(','')
        response1 = response1.replace(new RegExp('\\)' + '$'), '')
@@ -75,6 +75,30 @@ this.navbarService.getStockPrice(option.mcId).subscribe(res=>{
           stocks.push({id:element.pdt_dis_nm.split(',')[1],name:element.stock_name,mcId:element.sc_id})
       
         })
+      
+       }
+  
+    );
+    return stocks; 
+  }
+
+  addStock() {
+    let mcId = this.selectedStock.mcId;
+    let mobileNumber = localStorage.getItem('mobileNumber');
+
+    if(mobileNumber=='undefined' || mobileNumber== null ){
+      alert("Please login");
+      return
+    }
+
+    this.selectedStock = undefined
+    var stocks: IStocks[]= new Array()
+     this.navbarService.addStock(mobileNumber,mcId).subscribe(response1=>{
+
+       response1 = response1.replace('suggest1(','')
+       response1 = response1.replace(new RegExp('\\)' + '$'), '')
+       var res= JSON.parse(response1);
+      alert("success")
       
        }
   

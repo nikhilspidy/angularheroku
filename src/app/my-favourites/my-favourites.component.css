@@ -2,3 +2,16 @@
     color: #fff;
     background-color: #373a3c;
 }
+
+.loading-image{
+    display:block;
+    margin: 0 auto;
+  }
+
+  .green{
+    color:green
+}
+
+.red{
+    color:red
+}

@@ -6,17 +6,28 @@
 
 
    
-    <form action="/action_page.php">
+  <div *ngIf="!loggedIn">
       <table>
-        <tr>
+        <tr>7
           <td>
-        <input type="text" class="form-control" placeholder="Mobile Number" id="usr" name="username">
+        <input type="text" class="form-control" [(ngModel)]="mobileNumber" placeholder="Mobile Number" id="mobileNumber" name="mobileNumber">
       
     </td>
-      <td>&nbsp;&nbsp;<button type="submit" class="btn btn-outline-primary">LOGIN</button></td>
+      <td>&nbsp;&nbsp;<button type="submit" (click)="login()" class="btn btn-outline-primary">LOGIN</button></td>
     </tr>
   </table>
-    </form>
+</div>
+
+<div *ngIf="loggedIn">
+  <table>
+    <tr>
+      <td>
+    <p style='color:white'>Logged in as <b>{{mobileNumber}}</b></p>
+</td>
+  <td>&nbsp;&nbsp;<button type="submit" (click)="logout()" class="btn btn-outline-primary">LOGOUT</button></td>
+</tr>
+</table>
+</div>
 
     
   </div>

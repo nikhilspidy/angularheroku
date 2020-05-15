@@ -72,7 +72,29 @@ export class NavbarService {
       );
   }
 
-  getStockList(keyword:string):any{
+  
+ getMyStockList(mobileNumber:string){
+  let headers = new HttpHeaders({
+    'accept':'text/plain,application/json, text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01',
+    'accept-encoding':'gzip, deflate, br',
+    'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36',
+    'x-requested-with':'XMLHttpRequest'
+          
+      });
+
+      
+  return this.httpClient.get("https://nikhil-stock-ms.herokuapp.com/getStockList/"+mobileNumber,{headers,responseType: 'text'})
+  .pipe(
+    tap((response) => {{
+      var res= JSON.parse(response);
+      return res;}
+    })
+    );
+
+ }
+
+
+  getStockSuggestions(keyword:string):any{
     let headers = new HttpHeaders({
 'accept':'text/plain text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01',
 'accept-encoding':'gzip, deflate, br',
@@ -122,4 +144,34 @@ export class NavbarService {
       })
       );
   }
+
+  addStock(mobileNumber:string, mcId:string):any{
+    let headers = new HttpHeaders({
+  'accept':'text/plain,text/javascript, application/json, application/ecmascript, application/x-ecmascript, */*; q=0.01',
+  'accept-encoding':'gzip, deflate, br',
+  'accept-language':'en-US,en;q=0.9',
+  'referer':'https://www.moneycontrol.com/india/stockpricequote/',
+  'sec-fetch-dest':'empty',
+  'sec-fetch-mode':'cors',
+  'sec-fetch-site':'same-origin',
+  'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36',
+  'x-requested-with':'XMLHttpRequest'
+      
+  });
+    return this.httpClient.get("https://nikhil-stock-ms.herokuapp.com/addStock/"+mobileNumber+"/"+mcId,{headers,responseType: 'text'})
+    .pipe(
+      tap((response) => {{
+       // var res= JSON.parse(response);
+        //console.log("&!&@&@&*#&(@*&*^*&^&#%^$^%#^%^**()_(_)*)(*&^&%&^%^&%%^")
+        //console.log(res)
+        return null;}
+      })
+      );
+  }
+
+  
 }
+
+
+
+
