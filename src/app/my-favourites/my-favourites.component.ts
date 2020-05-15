@@ -12,24 +12,28 @@ export class MyFavouritesComponent implements OnInit {
   constructor(private navbarService: NavbarService) { }
   filteredOptions = [1,2,3,4]
   listOfMyStocksDetails = []
-  loading = true;
+  loading = false;
   priceCurrent :string;
-priceChange :Number; 
-mobileNumber:string
+  priceChange :Number; 
+  mobileNumber:string;
+  showAlert=false;
 
   ngOnInit() {
     this.mobileNumber = localStorage.getItem('mobileNumber');
     if(this.mobileNumber!='undefined' && this.mobileNumber!= null ){
       console.log("nikhil --------------------"+typeof this.mobileNumber)
       this.getMyStockList()
+    }else{
+      this.showAlert = true;
     }
       
   }
 
   listOfAPIs = new Array()
     getMyStockList(){
+
   
-  
+  this.loading = true;
 
   this.navbarService.getMyStockList(this.mobileNumber).subscribe(
     response=>{

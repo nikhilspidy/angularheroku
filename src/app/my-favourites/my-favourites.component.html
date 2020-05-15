@@ -2,6 +2,10 @@
 <div><img class="loading-image" *ngIf="loading" src="assets/loading.gif" />
 </div>
 
+<div *ngIf="showAlert" class="alert alert-danger" role="alert">
+  You are not logged in, Please login
+</div>
+
 <table *ngIf="!loading" class="table table-bordered table-inverse">
     <tbody>
   <tr *ngFor="let data of listOfMyStocksDetails">

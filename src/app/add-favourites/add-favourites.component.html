@@ -1,6 +1,11 @@
 <p>
   <strong>Add your Favourites Stocks here</strong>
 </p>
+
+<div *ngIf="showAlert" class="alert alert-danger" role="alert">
+  You are not logged in, Please login
+</div>
+
 <table>
   <tr>
     <td>
@@ -43,6 +48,7 @@
 </tbody>
 </table>
 </div>
+
 
 
 

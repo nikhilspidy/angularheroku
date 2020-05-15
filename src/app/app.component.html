@@ -13,7 +13,7 @@
         <input type="text" class="form-control" [(ngModel)]="mobileNumber" placeholder="Mobile Number" id="mobileNumber" name="mobileNumber">
       
     </td>
-      <td>&nbsp;&nbsp;<button type="submit" (click)="login()" class="btn btn-outline-primary">LOGIN</button></td>
+      <td>&nbsp;&nbsp;<button [disabled]="!mobileNumber" type="submit" (click)="login()" class="btn btn-primary">LOGIN</button></td>
     </tr>
   </table>
 </div>

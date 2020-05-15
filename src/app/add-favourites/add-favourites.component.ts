@@ -23,6 +23,7 @@ export class AddFavouritesComponent implements OnInit {
 priceCurrent :string;
 priceChange :Number;
 pricePercentageChange :Number;
+showAlert = false;
 
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
@@ -82,12 +83,13 @@ this.navbarService.getStockPrice(option.mcId).subscribe(res=>{
     return stocks; 
   }
 
+
   addStock() {
     let mcId = this.selectedStock.mcId;
     let mobileNumber = localStorage.getItem('mobileNumber');
 
     if(mobileNumber=='undefined' || mobileNumber== null ){
-      alert("Please login");
+      this.showAlert = true;
       return
     }
 
